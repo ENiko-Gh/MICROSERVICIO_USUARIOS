@@ -1,59 +1,176 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+![logo](assets/Logo-espe.png)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Arquitectura de software - Grupo 5  
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Integrantes
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+-  RODRIGUEZ BETTY
+-  DOMINGUEZ OSCAR
+-  VILLAMARIN VICTOR
+-  GUAMIALAMA NICOLAS
+-  POAQUIZA MARCO
+-  TENEMAZA ALANIS
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### Microservicio de Gestión de Citas y Historial Médico
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+[USER_G5_AS]
 
-## Laravel Sponsors
+Este proyecto es un microservicio Backend desarrollado en Laravel (PHP) con una arquitectura RESTful API. Su objetivo principal es gestionar la autenticación de usuarios (pacientes y doctores), la programación de citas médicas y el registro del historial clínico y tratamientos.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+#### 🚀 Arquitectura y Diseño
 
-### Premium Partners
+El microservicio opera bajo un enfoque de API Versioning y Protección de Rutas.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- Tecnología Principal: Laravel (con PHP 8+).
 
-## Contributing
+- Autenticación: Laravel Sanctum (Token-based authentication) para asegurar todas las rutas sensibles.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Versionamiento: Todas las rutas se agrupan bajo el prefijo /api/v1/.
 
-## Code of Conduct
+- Roles: El sistema diferencia entre dos tipos de usuarios:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Pacientes: Pueden registrarse, iniciar sesión y crear/listar sus propias citas.
 
-## Security Vulnerabilities
+- Doctores: Además de lo anterior, pueden crear, actualizar y eliminar entradas de historial médico y tratamientos.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+#### Estructura de Endpoints (v1)
+![Enpoinds](assets/ENPOINTS.png)
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+#### ⚙️ Configuración y Puesta en Marcha
+
+Sigue estos pasos para levantar el microservicio en tu entorno local.
+
+1. Instalación de Dependencias
+
+## 1. Clona el repositorio
+git clone <[URL_DE_TU_REPOSITORIO](https://github.com/saoricoder/USER_G5_AS.git)> USER_G5_AS
+cd USER_G5_AS
+
+## 2. Instala las dependencias de PHP
+```
+composer install
+```
+## 3. Copia el archivo de configuración .env
+```
+cp .env.example .env
+```
+## 4. Genera la clave de aplicación
+php artisan key:generate
+
+
+#### 2. Configuración de Base de Datos
+
+Asegúrse de configurar las variables de conexión a tu base de datos MySQL en el archivo .env.
+
+
+![BD](assets/env.png)
+
+
+![sin](assets/sinmigrar.png)
+
+###  Migraciones y Seeders (Población de Datos)
+
+Ejecuta las migraciones para crear las tablas y luego ejecuta los seeders para poblar los datos de prueba esenciales (usuarios, doctores, historial).
+
+### Ejecuta las migraciones
+```
+php artisan migrate
+```
+![migraciones](assets/migraciones.png)
+![alt text](assets/sepuesmigracion.png)
+#### Ejecuta los seeders para poblar la base de datos
+### Incluye: UsuarioSeeder, DoctorSeeder, HistoriaMedicaSeeder
+```
+php artisan db:seed
+```
+![seeders](<assets/poblar seeders.png>)
+#### 4. Ejecución del Servidor
+
+Inicia el servidor local de Laravel.
+
+php artisan serve
+
+![serve](assets/serve.png)
+
+
+El microservicio estará accesible en: http://127.0.0.1:8000 
+
+🔑 Datos de Acceso de Prueba (Seeders)
+
+Utiliza las siguientes credenciales para probar la API con Postman o Insomnia. Todos los passwords son password.
+
+![crearusuario](assets/creacionusuarios.png)
+
+![login](assets/login.png)
+
+doctora@test.com
+
+Necesario para crear/ver Historial
+
+
+paciente@test.com
+
+Necesario para crear Citas
+
+🔬 Endpoints Clave para Pruebas (Postman)
+
+#### A. Autenticación (Público)
+
+URL  http://127.0.0.1:8000/api/v1/
+
+Método  POST
+
+Descripción   REGISTRO
+
+/api/v1/login
+
+
+Obtener el token (e.g., usando doctora@test.com).
+
+![alt text](assets/loginDoctor.png)
+
+
+
+##### B. Gestión de Historial (Solo Doctor)
+
+REQUISITO: Usar el Token de doctora@test.com en el Authorization: Bearer <token> Header.
+
+URL http://127.0.0.1:8000/api/v1/historial/1
+
+Método  GET
+
+Descripción   LOGIN
+
+/api/v1/historial/1
+
+
+
+POST
+
+Crea un nuevo registro de historia. Requiere paciente_id, sintomas, diagnostico.
+![HISTORIA](assets/historial.png)
+
+
+
+
+
+
+🧑‍💻 Contribuciones y Soporte
+
+Para contribuciones o si encuentras algún problema de arquitectura, por favor revisa los siguientes archivos clave:
+```
+Rutas: routes/api.php
+```
+#### Controladores: 
+. app/Http/Controllers/HistoriaMedicaController.php y app/Http/  . .Controllers/CitaController.php
+
+#### Seeders: 
+. database/seeders/HistoriaMedicaSeeder.php
+
+![GET](assets/get.png)
